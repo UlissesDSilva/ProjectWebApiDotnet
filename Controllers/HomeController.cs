@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using ProjectWebApiDotnet.Models;
+using ProjectWebApiDotnet.Models.ViewModels;
 
 namespace ProjectWebApiDotnet.Controllers;
 

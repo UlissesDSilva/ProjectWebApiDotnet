@@ -1,4 +1,4 @@
-namespace ProjectWebApiDotnet.Models;
+namespace ProjectWebApiDotnet.Models.ViewModels;
 
 public class ErrorViewModel
 {
