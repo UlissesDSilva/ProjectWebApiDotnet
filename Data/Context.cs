@@ -13,4 +13,8 @@ using ProjectWebApiDotnet.Models.Entites;
         }
 
         public DbSet<ProjectWebApiDotnet.Models.Entites.Department> Department { get; set; } = default!;
-    }
+
+        public DbSet<ProjectWebApiDotnet.Models.Entites.Seller> Seller { get; set; } = default!;
+
+        public DbSet<ProjectWebApiDotnet.Models.Entites.SalesRecord> SalesRecords { get; set; } = default!;
+}
