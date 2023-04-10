@@ -6,24 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectWebApiDotnet.Models.Entites;
+using ProjectWebApiDotnet.Services;
 
 namespace ProjectWebApiDotnet.Controllers
 {
     public class DepartmentsController : Controller
     {
         private readonly Context _context;
+        private readonly DepartmentService _departmentService;
 
-        public DepartmentsController(Context context)
+        public DepartmentsController(Context context, DepartmentService departmentService)
         {
             _context = context;
+            _departmentService = departmentService;
         }
 
         // GET: Departments
         public async Task<IActionResult> Index()
         {
-              return _context.Department != null ? 
-                          View(await _context.Department.ToListAsync()) :
-                          Problem("Entity set 'Context.Department'  is null.");
+            var departments = await _departmentService.FindAllDepartments();
+             return _context.Department != null ? View(departments) : Problem("Entity set 'Context.Department'  is null.");
         }
 
         // GET: Departments/Details/5
