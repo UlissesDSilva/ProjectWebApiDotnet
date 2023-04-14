@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using ProjectWebApiDotnet.Data;
 using ProjectWebApiDotnet.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 var mySqlConnection = builder.Configuration.GetConnectionString("Context");
@@ -18,6 +20,14 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<SeedingService>(options => options.Seed());
 
+var enUs = new CultureInfo("en-US");
+var localization = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(enUs),
+    SupportedCultures = new List<CultureInfo> { enUs },
+    SupportedUICultures = new List<CultureInfo> { enUs }
+};
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +43,7 @@ using (var context = app.Services.CreateScope().ServiceProvider.GetRequiredServi
     var seeding = new SeedingService(context);
     seeding.Seed();
 }
+app.UseRequestLocalization(localization);
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
